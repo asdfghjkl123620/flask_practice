@@ -4,6 +4,7 @@ from flask import Flask
 def create_app(test_config=None):
     #創造並且配置app
     app = Flask(__name__, instance_relative_config=True)
+    #  __name__ Flask 才能知道在哪里可以 找到模板和静态文件等东西
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path,'flask.sqlite'),
