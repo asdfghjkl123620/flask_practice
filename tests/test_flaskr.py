@@ -15,4 +15,10 @@ def client():
             flaskr.init_db()
         yield client
     os.close(db_fd)
-    os.unlink(flaskr.app.config['DATABASE'])        
+    os.unlink(flaskr.app.config['DATABASE'])    
+
+def test_empty_db(client):
+    """Start with a blank database."""
+
+    rv = client.get('/')
+    assert b'No entries here so far' in rv.data    
