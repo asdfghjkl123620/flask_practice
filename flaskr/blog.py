@@ -136,6 +136,16 @@ def index():
         " FROM post p JOIN user u ON p.author_id = u.id"
         " ORDER BY created DESC"
     ).fetchall()
+    #設置session
+    # session['username'] = 'name'
+    #如果設置了 session.permanent 為 True，那麽過期時間是31天
+    #  session.permanent = True
+
+    # 讀取session
+    #  session.get('username')
+    
+    #刪除session
+    #  session['username'] = False
     return render_template("blog/index.html", posts=posts)
 
 

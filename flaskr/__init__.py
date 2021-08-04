@@ -1,5 +1,14 @@
 import os
-from flask import Flask
+from flask import Flask,session
+from datetime import timedelta
+from flask import jsonify
+from flask import request
+
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+
 
 def create_app(test_config=None):
     #創造並且配置app
@@ -8,7 +17,12 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path,'flask.sqlite'),
+        JWT_SECRET_KEY="super-secret"
     )
+
+
+    jwt = JWTManager(app)
+
     
     if test_config is None:
         #load the instance config, if it exists, when not testing
